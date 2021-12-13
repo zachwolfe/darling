@@ -5,7 +5,7 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "../../external/lkm/api.h"
+#include <darling/lkm/api.h>
 #include "lkm.h"
 #include "mach_traps.h"
 #include <mach/mach_init.h>

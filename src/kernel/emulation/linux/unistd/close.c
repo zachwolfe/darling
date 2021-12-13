@@ -4,7 +4,7 @@
 #include <linux-syscalls/linux.h>
 #include "../bsdthread/cancelable.h"
 #include "../mach/lkm.h"
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include "../simple.h"
 
 long sys_close(int fd)

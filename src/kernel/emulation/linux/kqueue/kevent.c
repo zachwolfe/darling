@@ -5,7 +5,7 @@
 #include <stddef.h>
 #include <sys/errno.h>
 #include "../mach/lkm.h"
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 
 long sys_kevent(int	kq, const struct kevent	*changelist, int nchanges,
 			struct	kevent *eventlist, int nevents,

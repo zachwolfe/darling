@@ -3,7 +3,7 @@
 #include "../base.h"
 #include "../errno.h"
 #include <linux-syscalls/linux.h>
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include <mach/lkm.h>
 #include "../vchroot_expand.h"
 #include "../bsdthread/per_thread_wd.h"

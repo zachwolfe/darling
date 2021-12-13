@@ -9,7 +9,7 @@
 #include "../fcntl/open.h"
 #include "../simple.h"
 #include "sysctl_proc.h"
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include "../mach/lkm.h"
 
 #ifndef isdigit

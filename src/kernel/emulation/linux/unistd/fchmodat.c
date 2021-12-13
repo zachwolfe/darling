@@ -5,7 +5,7 @@
 #include "../common_at.h"
 #include "../vchroot_expand.h"
 #include <mach/lkm.h>
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include <stdio.h>
 #include "../stat/common.h"
 #include <sys/stat.h>

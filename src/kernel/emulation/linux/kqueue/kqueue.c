@@ -6,7 +6,7 @@
 #include <sys/errno.h>
 #include "../simple.h"
 #include "../mach/lkm.h"
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 
 long sys_kqueue(void)
 {

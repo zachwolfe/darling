@@ -3,7 +3,7 @@
 #include "../base.h"
 #include "../errno.h"
 #include <linux-syscalls/linux.h>
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include <mach/lkm.h>
 #include "../../../../libc/include/fcntl.h"
 #include "../common_at.h"

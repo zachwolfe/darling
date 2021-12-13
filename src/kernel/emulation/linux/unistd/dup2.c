@@ -4,7 +4,7 @@
 #include <linux-syscalls/linux.h>
 #include "../duct_errno.h"
 #include "../mach/lkm.h"
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 
 long sys_dup2(int fd_from, int fd_to)
 {

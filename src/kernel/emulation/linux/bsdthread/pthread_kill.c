@@ -5,7 +5,7 @@
 #include <sys/errno.h>
 #include <stddef.h>
 #include "../mach/lkm.h"
-#include "../../../../external/lkm/api.h"
+#include <darling/lkm/api.h>
 #include "../simple.h"
 
 long sys_pthread_kill(int thread_port, int sig)

@@ -6,7 +6,7 @@
 #include "../dirent/getdirentries.h"
 #include "../unistd/dup.h"
 #include "../fcntl/open.h"
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include <linux-syscalls/linux.h>
 #include <stddef.h>
 

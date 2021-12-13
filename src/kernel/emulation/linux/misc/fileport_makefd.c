@@ -3,7 +3,7 @@
 #include "../errno.h"
 #include <linux-syscalls/linux.h>
 #include "../mach/lkm.h"
-#include "../../../../external/lkm/api.h"
+#include <darling/lkm/api.h>
 
 long sys_fileport_makefd(int port)
 {

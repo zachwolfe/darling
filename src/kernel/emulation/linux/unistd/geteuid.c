@@ -2,7 +2,7 @@
 #include "../base.h"
 #include <stddef.h>
 #include "../mach/lkm.h"
-#include "../../../../external/lkm/api.h"
+#include <darling/lkm/api.h>
 
 long sys_geteuid(void)
 {

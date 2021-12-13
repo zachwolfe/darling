@@ -4,7 +4,7 @@
 #include <linux-syscalls/linux.h>
 #include <stddef.h>
 #include "../mach/lkm.h"
-#include "../../../../external/lkm/api.h"
+#include <darling/lkm/api.h>
 
 long sys_pthread_markcancel(int thread_port)
 {

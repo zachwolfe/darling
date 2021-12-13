@@ -1,6 +1,6 @@
 #include "fdpath.h"
 #include "mach/lkm.h"
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 
 int fdpath(int fd, char* buf, size_t bufsiz)
 {

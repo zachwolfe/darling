@@ -5,7 +5,7 @@
 #include <sys/errno.h>
 #include "../common_at.h"
 #include "../vchroot_expand.h"
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include <mach/lkm.h>
 #include "../bsdthread/per_thread_wd.h"
 

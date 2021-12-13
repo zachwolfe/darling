@@ -7,7 +7,7 @@
 #include <linux-syscalls/linux.h>
 #include "sigaltstack.h"
 #include "../mach/lkm.h"
-#include "../../../../external/lkm/api.h"
+#include <darling/lkm/api.h>
 #include "../../../libsyscall/wrappers/_libkernel_init.h"
 #include <sys/mman.h>
 #include "../mman/mman.h"

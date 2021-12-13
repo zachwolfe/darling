@@ -5,7 +5,7 @@
 #include <linux-syscalls/linux.h>
 #include "../bsdthread/per_thread_wd.h"
 #include "../vchroot_expand.h"
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include <mach/lkm.h>
 #include <sys/errno.h>
 

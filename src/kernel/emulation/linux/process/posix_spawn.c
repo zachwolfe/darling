@@ -19,7 +19,7 @@
 #include "../signal/sigprocmask.h"
 #include "../mach/lkm.h"
 #include "../simple.h"
-#include "lkm/api.h"
+#include <darling/lkm/api.h>
 #include "fork.h"
 #include <stddef.h>
 #include <stdint.h>

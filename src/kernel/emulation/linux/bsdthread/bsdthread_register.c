@@ -4,7 +4,7 @@
 #include <sys/errno.h>
 #include "../signal/sigexc.h"
 #include "../mach/lkm.h"
-#include "../../../../external/lkm/api.h"
+#include <darling/lkm/api.h>
 #include <stdint.h>
 #include <pthread/tsd_private.h>
 #include <linux-syscalls/linux.h>

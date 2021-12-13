@@ -1,5 +1,5 @@
 #include "sysctl_sysctl.h"
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include <mach/machine.h>
 #include <sys/errno.h>
 

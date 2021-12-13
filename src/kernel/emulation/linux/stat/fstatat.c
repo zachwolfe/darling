@@ -4,7 +4,7 @@
 #include "../errno.h"
 #include "../common_at.h"
 #include "../vchroot_expand.h"
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include <mach/lkm.h>
 #include <linux-syscalls/linux.h>
 #include <sys/errno.h>

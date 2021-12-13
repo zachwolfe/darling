@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <linux-syscalls/linux.h>
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include "mach/lkm.h"
 
 extern char* memchr(char* buf, int c, __SIZE_TYPE__ n);

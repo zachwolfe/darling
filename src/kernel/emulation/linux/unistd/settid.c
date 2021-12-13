@@ -1,7 +1,7 @@
 #include "settid.h"
 #include "../base.h"
 #include "../mach/lkm.h"
-#include "../../../../external/lkm/api.h"
+#include <darling/lkm/api.h>
 
 long sys_settid(int uid, int gid)
 {

@@ -3,7 +3,7 @@
 #include "psynch_errno.h"
 #include <linux-syscalls/linux.h>
 #include "../mach/lkm.h"
-#include "../../../../external/lkm/api.h"
+#include <darling/lkm/api.h>
 #include "../simple.h"
 
 

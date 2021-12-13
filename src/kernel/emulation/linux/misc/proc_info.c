@@ -20,7 +20,7 @@
 #include "../vchroot_expand.h"
 #include <stdbool.h>
 #include <sys/proc.h>
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include "../mach/lkm.h"
 #include "sysctl_proc.h"
 #include <stddef.h>

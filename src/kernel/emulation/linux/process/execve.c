@@ -11,7 +11,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <errno.h>
-#include <lkm/api.h>
+#include <darling/lkm/api.h>
 #include <mach/lkm.h>
 #include "../vchroot_expand.h"
 #include "../bsdthread/per_thread_wd.h"
