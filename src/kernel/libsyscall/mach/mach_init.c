@@ -62,12 +62,6 @@
 #include <stdbool.h>
 #include "externs.h"
 
-#ifdef DARLING
-#include <darling/lkm/api.h>
-
-extern int default_kq;
-#endif
-
 mach_port_t bootstrap_port = MACH_PORT_NULL;
 mach_port_t mach_task_self_ = MACH_PORT_NULL;
 #ifdef __i386__
@@ -83,28 +77,13 @@ vm_size_t vm_page_size = 0;
 vm_size_t vm_page_mask = 0;
 int vm_page_shift = 0;
 
-#ifdef DARLING
-int mach_init(const char** applep);
-#else
 int mach_init(void);
-#endif
 int _mach_fork_child(void);
-#ifdef DARLING
-int _mach_fork_parent(void);
-#endif
 
-#ifdef DARLING
-static void mach_init_doit(const char** applep);
-#else
 static void mach_init_doit(void);
-#endif
 
 extern void _pthread_set_self(void *);
 extern void _init_cpu_capabilities(void);
-
-#ifdef DARLING
-extern void lkm_call(int nr, void* arg);
-#endif
 
 kern_return_t
 host_page_size(__unused host_t host, vm_size_t *out_page_size)
@@ -118,19 +97,11 @@ host_page_size(__unused host_t host, vm_size_t *out_page_size)
  * called by libSystem_initializer() in dynamic executables
  */
 int
-#ifdef DARLING
-mach_init(const char** applep)
-#else
 mach_init(void)
-#endif
 {
 	static bool mach_init_inited = false;
 	if (!mach_init_inited) {
-#ifdef DARLING
-		mach_init_doit(applep);
-#else
 		mach_init_doit();
-#endif
 		mach_init_inited = true;
 	}
 	return 0;
@@ -140,22 +111,9 @@ mach_init(void)
 int
 _mach_fork_child(void)
 {
-#ifdef DARLING
-	// we only have to reset to `-1`; the LKM takes care of closing it for us
-	default_kq = -1;
-	mach_init_doit(NULL);
-#else
 	mach_init_doit();
-#endif
 	return 0;
 }
-
-#ifdef DARLING
-int _mach_fork_parent(void) {
-	lkm_call(NR_fork_wait_for_child, NULL);
-	return 0;
-};
-#endif
 
 #if defined(__arm__) || defined(__arm64__)
 #if !defined(_COMM_PAGE_USER_PAGE_SHIFT_64) && defined(_COMM_PAGE_UNUSED0)
@@ -164,31 +122,31 @@ int _mach_fork_parent(void) {
 #endif
 #endif
 
-void
-#ifdef DARLING
-mach_init_doit(const char** applep)
+#if defined(__x86_64__) || defined(__i386__)
+#define COMM_PAGE_KERNEL_PAGE_SHIFT_MIN_VERSION 14
 #else
-mach_init_doit(void)
-#endif
-{
-#ifdef DARLING
-	mach_driver_init(applep);
+#define COMM_PAGE_KERNEL_PAGE_SHIFT_MIN_VERSION 3
 #endif
 
+void
+mach_init_doit(void)
+{
 	// Initialize cached mach ports defined in mach_init.h
 	mach_task_self_ = task_self_trap();
 	_task_reply_port = mach_reply_port();
 
 	if (vm_kernel_page_shift == 0) {
-#ifdef  _COMM_PAGE_KERNEL_PAGE_SHIFT
+#if defined(__x86_64__) || defined(__i386__)
+		if ((*((uint16_t *)_COMM_PAGE_VERSION) >= COMM_PAGE_KERNEL_PAGE_SHIFT_MIN_VERSION)) {
+			vm_kernel_page_shift = *(uint8_t*) _COMM_PAGE_KERNEL_PAGE_SHIFT;
+		} else {
+			vm_kernel_page_shift = I386_PGSHIFT;
+		}
+#else
 		vm_kernel_page_shift = *(uint8_t*) _COMM_PAGE_KERNEL_PAGE_SHIFT;
+#endif
 		vm_kernel_page_size = 1 << vm_kernel_page_shift;
 		vm_kernel_page_mask = vm_kernel_page_size - 1;
-#else
-		vm_kernel_page_size = PAGE_SIZE;
-		vm_kernel_page_mask = PAGE_MASK;
-		vm_kernel_page_shift = PAGE_SHIFT;
-#endif /* _COMM_PAGE_KERNEL_PAGE_SHIFT */
 	}
 
 	if (vm_page_shift == 0) {
@@ -197,7 +155,11 @@ mach_init_doit(void)
 #elif defined(__arm__)
 		vm_page_shift = *(uint8_t*) _COMM_PAGE_USER_PAGE_SHIFT_32;
 #else
-		vm_page_shift = vm_kernel_page_shift;
+		if ((*((uint16_t *)_COMM_PAGE_VERSION) >= COMM_PAGE_KERNEL_PAGE_SHIFT_MIN_VERSION)) {
+			vm_page_shift = *(uint8_t*) _COMM_PAGE_USER_PAGE_SHIFT_64;
+		} else {
+			vm_page_shift = vm_kernel_page_shift;
+		}
 #endif
 		vm_page_size = 1 << vm_page_shift;
 		vm_page_mask = vm_page_size - 1;

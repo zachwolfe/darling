@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2020 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -21,34 +21,6 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef NO_SYSCALL_LEGACY
+#define VARIANT_CANCELABLE
 
-#define _NONSTD_SOURCE
-#include <sys/cdefs.h>
-
-#include <sys/types.h>
-#include <sys/fcntl.h>
-#include <stdarg.h>
-
-int __open_nocancel(const char *path, int flags, mode_t mode);
-
-/*
- * open stub: The legacy interface never automatically associated a controlling
- * tty, so we always pass O_NOCTTY.
- */
-int
-open(const char *path, int flags, ...)
-{
-	mode_t mode = 0;
-
-	if (flags & O_CREAT) {
-		va_list ap;
-		va_start(ap, flags);
-		// compiler warns to pass int (not mode_t) to va_arg
-		mode = va_arg(ap, int);
-		va_end(ap);
-	}
-	return __open_nocancel(path, flags | O_NOCTTY, mode);
-}
-
-#endif /* NO_SYSCALL_LEGACY */
+#include "../open-base.c"
