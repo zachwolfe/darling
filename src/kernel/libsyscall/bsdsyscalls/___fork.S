@@ -108,7 +108,6 @@ L1:
 		orl	%edx,%edx	// CF=OF=0,  ZF set if zero result	
 		jz	L2		// parent, since r1 == 0 in parent, 1 in child
 	#endif
-	
 	//child here...
 	xorq	%rax, %rax
 	PICIFY(__current_pid)
