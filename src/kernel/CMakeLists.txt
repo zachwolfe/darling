@@ -18,7 +18,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse -msse2 -msse3 -w -fblocks -ffreestandi
 # -> dyld places stubs -> stubs go into dyld_stub_binder at first use
 # -> there is a temporary loss of 16-byte stack alignment in __darling_bsd_syscall
 # -> dyld_stub_binder checks for this and bails out with a SIGSEGV
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__DARWIN_UNIX03 -fPIC -w -nostdinc -Wl,-bind_at_load")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC -w -nostdinc -Wl,-bind_at_load")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -nostdlib")
 
 #set(DYLIB_INSTALL_NAME "/usr/lib/system/libsystem_c.dylib")
