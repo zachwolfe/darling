@@ -52,7 +52,7 @@
 #include <arm/arch.h>
 #endif
 
-ifdef DARLING
+#ifdef DARLING
 #include <darling/emulation/linux-syscalls.h>
 #endif
 
@@ -199,7 +199,7 @@ _os_ptr_munge(uintptr_t ptr)
 
 #if defined(__i386__) || defined(__x86_64__)
 
-if defined(DARLING) && defined(__i386__) && !defined(__x86_64__)
+#if defined(DARLING) && defined(__i386__) && !defined(__x86_64__)
 #define _OS_PTR_MUNGE(_reg) \
 	xor %fs:_OS_TSD_OFFSET(__TSD_PTR_MUNGE), _reg
 #else
