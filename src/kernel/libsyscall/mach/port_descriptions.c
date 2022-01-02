@@ -71,10 +71,17 @@ mach_host_special_port_description(int port)
 		[HOST_SYSPOLICYD_PORT] = "syspolicyd",
 		[HOST_FILECOORDINATIOND_PORT] = "filecoordinationd",
 		[HOST_FAIRPLAYD_PORT] = "fairplayd",
+#ifdef DARLING
+		[HOST_IOCOMPRESSIONSTATS_PORT] = "iocompressionstats",
+#endif
 	};
+#ifdef DARLING
+	_Static_assert(HOST_IOCOMPRESSIONSTATS_PORT == HOST_MAX_SPECIAL_PORT,
+	    "all host special ports must have descriptions");
+#else
 	_Static_assert(HOST_FAIRPLAYD_PORT == HOST_MAX_SPECIAL_PORT,
 	    "all host special ports must have descriptions");
-
+#endif
 	return hsp_descs[port_index];
 }
 
